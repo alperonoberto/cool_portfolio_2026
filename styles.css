@@ -157,6 +157,37 @@ nav a:hover {
     background: var(--surface2)
 }
 
+.menu-toggle {
+    display: none;
+    flex: none;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+    color: var(--ink);
+    cursor: pointer;
+    place-items: center
+}
+
+.menu-toggle:hover {
+    border-color: var(--accent)
+}
+
+.menu-toggle svg {
+    width: 20px;
+    height: 20px
+}
+
+.menu-toggle .close-icon,
+.menu-toggle[aria-expanded="true"] .menu-icon {
+    display: none
+}
+
+.menu-toggle[aria-expanded="true"] .close-icon {
+    display: block
+}
+
 .theme {
     flex: none;
     width: 42px;
@@ -920,23 +951,48 @@ footer img {
     .bar {
         height: auto;
         flex-wrap: wrap;
-        padding-top: .6rem
+        padding-top: .6rem;
+        padding-bottom: .6rem
     }
 
     .logo {
         order: 1
     }
 
-    .theme {
+    .menu-toggle {
+        display: grid;
         order: 2;
         margin-left: auto
     }
 
-    nav {
+    .theme {
         order: 3;
+        margin-left: 0
+    }
+
+    nav {
+        order: 4;
         flex: 1 0 100%;
         margin: 0;
-        padding: .35rem 0 .55rem
+        padding: .35rem 0 .55rem;
+        overflow: visible;
+        flex-direction: column;
+        gap: .25rem
+    }
+
+    nav a {
+        display: flex;
+        align-items: center;
+        min-height: 44px;
+        padding: .6rem .75rem
+    }
+
+    html.menu-ready nav:not(.is-open) {
+        display: none
+    }
+
+    html.menu-ready .menu-toggle {
+        display: grid
     }
 
     html {

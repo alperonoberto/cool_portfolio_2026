@@ -10,6 +10,32 @@
     function setTheme(t) { document.documentElement.setAttribute("data-theme", t); store("theme", t) }
     $("#theme").addEventListener("click", function () { setTheme(isDark() ? "light" : "dark") });
 
+    /* Navegación móvil */
+    var menuButton = $("#menuToggle"), primaryNav = $("#primaryNav");
+    function setMenuOpen(open) {
+        menuButton.setAttribute("aria-expanded", String(open));
+        menuButton.setAttribute("aria-label", open ? "Cerrar menú de navegación" : "Abrir menú de navegación");
+        primaryNav.classList.toggle("is-open", open);
+    }
+    menuButton.addEventListener("click", function () {
+        setMenuOpen(menuButton.getAttribute("aria-expanded") !== "true");
+    });
+    primaryNav.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () { setMenuOpen(false) });
+    });
+    document.addEventListener("click", function (event) {
+        if (menuButton.getAttribute("aria-expanded") === "true" &&
+            !menuButton.contains(event.target) &&
+            !primaryNav.contains(event.target)) setMenuOpen(false);
+    });
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && menuButton.getAttribute("aria-expanded") === "true") {
+            setMenuOpen(false);
+            menuButton.focus();
+        }
+    });
+    document.documentElement.classList.add("menu-ready");
+
     /* Habilidades */
     var S = [
         ["Python", "Desarrollo", "Automatización, parsing"], ["JavaScript", "Desarrollo", "Frontend y APIs"], ["TypeScript", "Desarrollo", "Angular"], ["C#/.NET", "Desarrollo", "MVC"], ["SQL", "Desarrollo", "Consultas y datos"], ["HTML5/CSS", "Desarrollo", "MTA HTML5"], ["Angular", "Desarrollo", "Prácticas"],
