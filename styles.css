@@ -885,6 +885,19 @@ footer {
     font-size: .9rem
 }
 
+footer .wrap {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+}
+
+footer img {
+    display: block;
+    width: 24px;
+    height: 24px;
+    object-fit: contain
+}
+
 #toast {
     position: fixed;
     left: 50%;
