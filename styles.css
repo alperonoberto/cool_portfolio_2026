@@ -333,6 +333,12 @@ h3 {
     color: var(--ink)
 }
 
+.btn .github-mark {
+    width: 1.15rem;
+    height: 1.15rem;
+    flex: none
+}
+
 .btn:hover {
     border-color: var(--accent)
 }
