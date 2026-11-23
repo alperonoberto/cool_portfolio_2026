@@ -520,7 +520,7 @@ h3 {
 .tl li::before {
     content: "";
     position: absolute;
-    left: -8px;
+    left: -11px;
     top: .4rem;
     width: 14px;
     height: 14px;
