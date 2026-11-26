@@ -7,7 +7,16 @@
     /* Tema */
     function isDark() { var a = document.documentElement.getAttribute("data-theme"); return a ? a === "dark" : matchMedia("(prefers-color-scheme: dark)").matches }
     var saved = store("theme"); if (saved) document.documentElement.setAttribute("data-theme", saved);
-    function setTheme(t) { document.documentElement.setAttribute("data-theme", t); store("theme", t) }
+    function updateLogo() {
+        var logo = $("#logo");
+        if (logo) logo.setAttribute("src", isDark() ? "assets/logo_light.ico" : "assets/logo_dark.ico");
+    }
+    updateLogo();
+    function setTheme(t) {
+        document.documentElement.setAttribute("data-theme", t);
+        store("theme", t);
+        updateLogo();
+    }
     $("#theme").addEventListener("click", function () { setTheme(isDark() ? "light" : "dark") });
 
     /* Navegación móvil */
@@ -63,6 +72,15 @@
     $("#copy").addEventListener("click", function () {
         var ok = function () { toast("Email copiado") }, ko = function () { toast("Cópialo a mano: " + EMAIL) };
         try { navigator.clipboard.writeText(EMAIL).then(ok, ko) } catch (e) { ko() }
+    });
+
+    $("#download-cv").addEventListener("click", function () {
+        var link = document.createElement("a");
+        link.href = "assets/CV_Alberto_Sanchez_Villalba.pdf";
+        link.download = "CV_Alberto_Sanchez_Villalba.pdf";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     });
 
     /* Juego */

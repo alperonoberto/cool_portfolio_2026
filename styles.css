@@ -10,6 +10,7 @@
     --signal: #0B7A6A;
     --ok: #2F8F4E;
     --bad: #C8283E;
+    --download: #F2C94C;
     --sans: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", sans-serif;
     --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
     color-scheme: light;
@@ -28,6 +29,7 @@
         --signal: #5FD3BC;
         --ok: #8BD66B;
         --bad: #FF6B81;
+        --download: #E9A83B;
         color-scheme: dark;
     }
 }
@@ -44,6 +46,7 @@
     --signal: #5FD3BC;
     --ok: #8BD66B;
     --bad: #FF6B81;
+    --download: #E9A83B;
     color-scheme: dark;
 }
 
@@ -333,7 +336,20 @@ h3 {
     color: var(--ink)
 }
 
-.btn .github-mark {
+.btn.download {
+    background: var(--download);
+    color: #000;
+    border-color: var(--download);
+}
+
+.btn.download:hover {
+    filter: brightness(1.06);
+}
+
+.btn .github-mark,
+.btn .mail-mark,
+.btn .copy-mark,
+.btn .download-mark {
     width: 1.15rem;
     height: 1.15rem;
     flex: none
@@ -889,7 +905,7 @@ h3 {
     color: color-mix(in srgb, var(--bg) 75%, transparent)
 }
 
-.contact .btn {
+.contact .btn:not(.download) {
     background: var(--bg);
     color: var(--ink);
     border-color: var(--bg)
@@ -1030,6 +1046,12 @@ footer img {
 
     .contact {
         border-radius: 18px
+    }
+
+    .contact .btns {
+        flex-direction: column;
+        gap: .5rem;
+        width: 100%;
     }
 }
 
