@@ -19,6 +19,28 @@
     }
     $("#theme").addEventListener("click", function () { setTheme(isDark() ? "light" : "dark") });
 
+    /* Inclinación de la foto al pasar el ratón, solo en escritorio */
+    var portrait = $(".portrait"), portraitTilt = matchMedia("(min-width: 701px) and (hover: hover) and (prefers-reduced-motion: no-preference)");
+    if (portrait) {
+        function tiltPortrait(event) {
+            if (!portraitTilt.matches || event.pointerType !== "mouse") return;
+            var bounds = portrait.getBoundingClientRect();
+            var x = (event.clientX - bounds.left) / bounds.width - 0.5;
+            var y = (event.clientY - bounds.top) / bounds.height - 0.5;
+            portrait.style.setProperty("--tilt-x", (-y * 8).toFixed(2) + "deg");
+            portrait.style.setProperty("--tilt-y", (x * 8).toFixed(2) + "deg");
+            portrait.classList.add("is-tilting");
+        }
+        function resetPortraitTilt() {
+            portrait.classList.remove("is-tilting");
+            portrait.style.removeProperty("--tilt-x");
+            portrait.style.removeProperty("--tilt-y");
+        }
+        portrait.addEventListener("pointerenter", tiltPortrait);
+        portrait.addEventListener("pointermove", tiltPortrait);
+        portrait.addEventListener("pointerleave", resetPortraitTilt);
+    }
+
     /* Navegación móvil */
     var menuButton = $("#menuToggle"), primaryNav = $("#primaryNav");
     function setMenuOpen(open) {
@@ -72,15 +94,6 @@
     $("#copy").addEventListener("click", function () {
         var ok = function () { toast("Email copiado") }, ko = function () { toast("Cópialo a mano: " + EMAIL) };
         try { navigator.clipboard.writeText(EMAIL).then(ok, ko) } catch (e) { ko() }
-    });
-
-    $("#download-cv").addEventListener("click", function () {
-        var link = document.createElement("a");
-        link.href = "assets/CV_Alberto_Sanchez_Villalba.pdf";
-        link.download = "CV_Alberto_Sanchez_Villalba.pdf";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
     });
 
     /* Juego */

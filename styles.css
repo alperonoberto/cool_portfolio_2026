@@ -454,6 +454,18 @@ h3 {
     background: var(--surface2)
 }
 
+@media (min-width:701px) and (hover:hover) and (prefers-reduced-motion:no-preference) {
+    .portrait img {
+        transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+        transform-origin: center;
+        transition: transform .24s ease-out
+    }
+
+    .portrait.is-tilting img {
+        transition: none
+    }
+}
+
 @media (max-width:700px) {
     .hero {
         padding-top: 2rem
