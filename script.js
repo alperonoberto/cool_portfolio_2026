@@ -1,8 +1,49 @@
 (function () {
     var $ = function (s) { return document.querySelector(s) };
     var EMAIL = "alperonoberto@gmail.com";
+    var GA_ID = "G-KTTPXD59P1";
     function toast(m) { var t = $("#toast"); t.textContent = m; t.classList.add("on"); clearTimeout(toast.i); toast.i = setTimeout(function () { t.classList.remove("on") }, 2000) }
     function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v) } catch (e) { return null } }
+
+    /* Analítica, solo tras consentimiento */
+    var analyticsConfigured = false;
+    function startAnalytics() {
+        if (!window.gtag) {
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function () { window.dataLayer.push(arguments) };
+            window.gtag("consent", "default", { analytics_storage: "denied" });
+        }
+        window.gtag("consent", "update", { analytics_storage: "granted" });
+        if (analyticsConfigured) return;
+        window.gtag("js", new Date());
+        window.gtag("config", GA_ID);
+        analyticsConfigured = true;
+        var analyticsScript = document.createElement("script");
+        analyticsScript.async = true;
+        analyticsScript.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+        analyticsScript.addEventListener("error", function () {
+            console.error("No se pudo cargar Google Analytics.");
+            window.gtag = null;
+            analyticsConfigured = false;
+        });
+        document.head.appendChild(analyticsScript);
+    }
+    var analyticsConsent = $("#analyticsConsent");
+    var analyticsChoice = store("analytics-consent");
+    function setAnalyticsConsent(granted) {
+        store("analytics-consent", granted ? "granted" : "denied");
+        if (window.gtag) window.gtag("consent", "update", { analytics_storage: granted ? "granted" : "denied" });
+        else if (granted) startAnalytics();
+        analyticsConsent.hidden = true;
+    }
+    if (analyticsChoice === "granted") startAnalytics();
+    else if (analyticsChoice !== "denied") analyticsConsent.hidden = false;
+    $("#acceptAnalytics").addEventListener("click", function () { setAnalyticsConsent(true) });
+    $("#rejectAnalytics").addEventListener("click", function () { setAnalyticsConsent(false) });
+    $("#consentPreferences").addEventListener("click", function () {
+        analyticsConsent.hidden = false;
+        $("#acceptAnalytics").focus();
+    });
 
     /* Tema */
     function isDark() { var a = document.documentElement.getAttribute("data-theme"); return a ? a === "dark" : matchMedia("(prefers-color-scheme: dark)").matches }

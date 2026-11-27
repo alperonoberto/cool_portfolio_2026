@@ -234,8 +234,20 @@
   </main>
   <footer>
     <div class="wrap"><img id="logo" src="assets/logo_dark.ico" width="24" height="24" alt=""><span>© 2026 · Portfolio
-        personal</span></div>
+        personal</span><button class="consent-preferences" id="consentPreferences" type="button">Preferencias de
+        analítica</button></div>
   </footer>
+  <aside class="analytics-consent" id="analyticsConsent" aria-labelledby="analyticsConsentTitle" hidden>
+    <div class="analytics-consent-copy">
+      <h2 id="analyticsConsentTitle">Preferencias de analítica</h2>
+      <p>Google Analytics nos ayuda a conocer el uso de este portfolio. Solo se activa si aceptas. Puedes cambiar tu
+        elección cuando quieras desde el pie de página.</p>
+    </div>
+    <div class="analytics-consent-actions">
+      <button class="btn" id="rejectAnalytics" type="button">Rechazar</button>
+      <button class="btn primary" id="acceptAnalytics" type="button">Aceptar analítica</button>
+    </div>
+  </aside>
   <div id="toast" role="status"></div>
 </body>
 

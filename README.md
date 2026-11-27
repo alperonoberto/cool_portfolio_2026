@@ -52,6 +52,10 @@ Un portfolio responsive para presentar experiencia en sistemas y redes, desarrol
 
 Abre `index.html` en un navegador o sirve la carpeta con cualquier servidor estático. No hace falta compilar ni instalar dependencias.
 
+## Analítica
+
+El sitio usa Google Analytics 4 con el ID de medición `G-KTTPXD59P1`. La etiqueta solo se carga si la persona visitante acepta la analítica; puede rechazarla o cambiar su elección desde «Preferencias de analítica» en el pie de página.
+
 ## Despliegue
 
 El workflow [`deploy-firebase.yml`](.github/workflows/deploy-firebase.yml) publica en Firebase Hosting cada vez que hay un push a `main`.
