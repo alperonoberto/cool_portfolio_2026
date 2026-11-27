@@ -47,6 +47,7 @@ Un portfolio responsive para presentar experiencia en sistemas y redes, desarrol
 | Estilos | CSS3 |
 | Interactividad | JavaScript |
 | Hosting y despliegue | Firebase Hosting · GitHub Actions |
+| Análisis de visitas | Google Analytics |
 
 ## Ejecutar localmente
 
@@ -54,10 +55,8 @@ Abre `index.html` en un navegador o sirve la carpeta con cualquier servidor est�
 
 ## Analítica
 
-El sitio usa Google Analytics 4 con el ID de medición `G-KTTPXD59P1`. La etiqueta solo se carga si la persona visitante acepta la analítica; puede rechazarla o cambiar su elección desde «Preferencias de analítica» en el pie de página.
+El sitio usa Google Analytics 4. La etiqueta solo se carga si la persona visitante acepta la analítica; puede rechazarla o cambiar su elección desde «Preferencias de analítica» en el pie de página.
 
 ## Despliegue
 
 El workflow [`deploy-firebase.yml`](.github/workflows/deploy-firebase.yml) publica en Firebase Hosting cada vez que hay un push a `main`.
-
-Para habilitarlo, añade en **GitHub → Settings → Secrets and variables → Actions** el repository secret `FIREBASE_SERVICE_ACCOUNT_PORTFOLIO_A5CEB`, con las credenciales JSON de una cuenta de servicio autorizada para el proyecto Firebase `portfolio-a5ceb`.
